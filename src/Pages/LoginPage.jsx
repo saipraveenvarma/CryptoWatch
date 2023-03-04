@@ -7,10 +7,22 @@ const LoginPage = () => {
 
   const history = useHistory()
 
+ //   localStorage.setItem('credentials', JSON.stringify(credentials))
+
   const handleLogin = (e) => {
     e.preventDefault();
-    
-    // get the user data from the localStorage if matches take the user to Home page
+    const Usercredentials = JSON.parse(localStorage.getItem('credentials'))
+
+    if (!Usercredentials) {
+      return alert(`It seems you don't have a account register now`) 
+    }
+
+    if (Usercredentials.email === credentials.email && Usercredentials.password === credentials.password) {
+      return history.push('/')
+    }
+    else {
+      alert('Credentials are not valid')
+    }
 
   }
   const handleChange = (e) => {
