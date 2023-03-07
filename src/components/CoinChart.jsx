@@ -35,19 +35,16 @@ const CoinChart = ({ id }) => {
     const { currency, symbol } = CryptoState();
 
     const fetchChartData = async () => {
-
-        //fetch chart data here
-
+        const { data } = await axios.get(HistoricalChart(id, period, currency))
         setFlag(true);
+        setHistoricalData(data.prices);
     }
 
     useEffect(() => {
-
-
+        fetchChartData();
     }, [currency, period])
 
-
-    // styling starts here
+    console.log(historicalData)
 
     const darkTheme = createTheme({
         palette: {
@@ -76,8 +73,6 @@ const CoinChart = ({ id }) => {
             backgroundColor: "yellow",
         },
     }));
-
-    //styling ends here
 
     return (
         <ThemeProvider theme={darkTheme}>
